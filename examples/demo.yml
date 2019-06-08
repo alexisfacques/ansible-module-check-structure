@@ -1,0 +1,33 @@
+---
+
+- hosts: localhost
+  tasks:
+    - name: This should pass
+      check_structure:
+        struct:
+          - foo: str
+            fooList: list
+            fooDict:
+              bar: int
+        var:
+          - foo: 'foo'
+            fooList:
+              - 'foo'
+              - 'bar'
+            fooDict:
+              bar: 1
+
+    - name: This should fail
+      check_structure:
+        struct:
+          - foo: int
+            fooList: list
+            fooDict:
+              bar: str
+        var:
+          - foo: 'foo'
+            fooList:
+              - 'foo'
+              - 'bar'
+            fooDict:
+              bar: 1
